@@ -1,11 +1,13 @@
 // Write all the Javacript here
 $( document ).ready(function() {
     // Your code here.
+/*
 	$( "a" ).click(function( event ) {
 	    someFunction();
 	    console.log("you've been clicked");
 	    event.preventDefault();
 	});	
+*/
 	$(".alert").hide();
 	
 });

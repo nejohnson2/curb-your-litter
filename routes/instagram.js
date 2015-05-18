@@ -47,7 +47,7 @@ exports.instagram = function(req, res){
 		};
 */
 		var templateData = {
-			'title' : 'Instagram Images',
+			'title' : 'Instagram Images #NewEngland',
 			'data' : medias,
 		}
 		res.render('instagram.html', templateData);

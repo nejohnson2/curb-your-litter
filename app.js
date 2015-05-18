@@ -1,18 +1,10 @@
 var ejs = require('ejs')
 	, partials = require('express-partials')
-	, api = require('instagram-node').instagram()
 	, express = require('express')
 	, app = express();
 
 var routes = require('./routes/index.js');	
 var instagram = require('./routes/instagram.js');	
-
-api.use({
-  client_id: process.env.CLIENT_ID,
-  client_secret: process.env.CLIENT_SECRET
-});
-
-var redirect_uri = 'http://curb-your-litter.com/handleauth';
 
 app.configure(function(){
 
@@ -33,6 +25,7 @@ app.configure(function(){
 
 app.get('/', routes.main);
 
+app.get('/instagram', instagram.instagram);
 // This is where you would initially send users to authorize
 app.get('/authorize_user', instagram.authorize_user);
 // This is your redirect URI

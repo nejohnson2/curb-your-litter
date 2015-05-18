@@ -6,12 +6,14 @@ var ejs = require('ejs')
 var routes = require('./routes/index.js');	
 var instagram = require('./routes/instagram.js');	
 
+/*
 api.use({
   client_id: 'aee1ef05f261441db8c6b92c3d74a1e2',
   client_secret: '86f15bb5ca394bd28684dd0ea2905e87'
 });
 
 var redirect_uri = 'http://curb-your-litter.com/handleauth';
+*/
 
 app.configure(function(){
 

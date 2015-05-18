@@ -1,7 +1,21 @@
-<h1>Hello Instagram</h1>
+<h2>{{title}}</h2>
 
-<ul>
-	<% data.forEach(function(images) { %>
-		<li><%= medias %></li>
-	<% }); %>
-<ul>
+<ul style="list-style-type: none;">
+	{{#data}}
+	<li>
+		<img class='insta' src="{{images.standard_resolution.url}}"</img>
+		<p>{{location.latitude}}, {{location.longitude}}</p>
+	</li>
+	{{/data}}
+</ul>
+
+<style>
+li{
+	float:left;
+	padding: 10px;
+}
+.insta{
+/* 	float: left; */
+	height: 200px;
+	
+}

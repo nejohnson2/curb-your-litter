@@ -28,15 +28,16 @@ exports.handleauth = function(req, res) {
 	GET /instagram
 */
 exports.instagram = function(req, res){
+/*
+	var hd1 = function(err, medias, pagination, remaining, limit){
+		if(pagination.next) {
+			pagination.next(hd1, {'count': 10});
+		}
+	};
+*/
 
 	api.tag_media_recent('NewEngland', function(err, medias, pagination, remaining, limit) {
-		//console.log(medias);
-		console.log("Error: " + err);
-		console.log("Pagination: ");
-		console.log(pagination);
-		console.log("remaining: " + remaining);		
-		console.log("limit: " + limit);		
-		
+		console.log(err);
 /*
 		for(i=0; medias.length; i++){
 			if (medias[i].location != null){

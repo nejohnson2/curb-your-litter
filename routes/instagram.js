@@ -53,11 +53,20 @@ app.post('/like/:media_id', function(req, res, next) {
          
 exports.instagram = function(req, res){
 
-	api.user('nj2', function(err, result, remaining, limit) {
-		console.log(result);
-		console.log('Hello World');
+	var medias = api.tag_media_recent('NewEngland', function(err, medias, pagination, remaining, limit) {
+//		console.log(medias.images);
+
+/*
+		for(i=0; medias.length; i++){
+			console.log(i);
+			console.log(medias[i].images.standard_resolution.url);
+		};
+*/
+
+//		console.log(remaining);
+//		console.log(limit);
 	});
 	
 
-    res.render('instagram.html');
+    res.render('instagram.html', {data: medias});
 }

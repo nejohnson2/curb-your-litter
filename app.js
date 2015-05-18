@@ -1,18 +1,23 @@
-var ejs = require('ejs')
-	, partials = require('express-partials')
-	, express = require('express')
-	, app = express();
+var express = require('express');
+var path = require('path');
+/* 	, partials = require('express-partials') */
+
+var app = express();
 
 var routes = require('./routes/index.js');	
 var instagram = require('./routes/instagram.js');	
 
 app.configure(function(){
 
-	app.use(partials());
-	app.engine('html', require('ejs').renderFile); //renders .ejs as html
+	//app.use(partials());
+	//app.engine('html', require('ejs').renderFile); //renders .ejs as html
 	
 	app.set('views', __dirname + '/views');
-	app.use(express.static(__dirname + '/public'));
+	//app.use(express.static(__dirname + '/public'));
+	
+	app.set('view engine','html');
+	app.set('layout','layout');
+	app.engine('html', require('hogan-express'));
 	
 	app.use(express.bodyParser()); //deals with incoming request objects
 	app.use(express.methodOverride());
@@ -20,7 +25,9 @@ app.configure(function(){
 	/**** Turn on some debugging tools ****/
 	app.use(express.logger()); // sends messages into the terminal 
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); //dumpExceptions - directs exceptions to stderr - showStack - generate HTML for an exception å
-    
+
+	app.use(app.router);
+	app.use(express.static(path.join(__dirname, 'public')));    
 });
 
 app.get('/', routes.main);

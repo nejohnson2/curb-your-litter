@@ -1,4 +1,5 @@
-/* var api = require('instagram-node').instagram() */
+var io = require('socket.io').listen(app.listen(port));
+
 Instagram = require('instagram-node-lib');
 
 Instagram.set('client_id', process.env.CLIENT_ID);

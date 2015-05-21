@@ -6,6 +6,8 @@ var app = express();
 var routes = require('./routes/index.js');	
 var instagram = require('./routes/instagram.js');	
 
+/* var api = require('instagram-node').instagram() */
+
 app.configure(function(){
 
 	app.set('views', __dirname + '/views');
@@ -35,10 +37,10 @@ app.get('/', routes.main);
 	Instagram Routes
 */
 app.get('/instagram', instagram.instagram);
-// This is where you would initially send users to authorize
-app.get('/authorize_user', instagram.authorize_user);
-// This is your redirect URI
-app.get('/handleauth', instagram.handleauth);
+app.get('/callback', instagram.callback);
+app.post('/callback', instagram.post_callback);
+
+
 
 
 /************* *************/

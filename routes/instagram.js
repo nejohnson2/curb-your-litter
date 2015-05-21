@@ -1,57 +1,50 @@
-var api = require('instagram-node').instagram()
+/* var api = require('instagram-node').instagram() */
+Instagram = require('instagram-node-lib');
 
-api.use({
-  client_id: process.env.CLIENT_ID,
-  client_secret: process.env.CLIENT_SECRET
+Instagram.set('client_id', process.env.CLIENT_ID);
+Instagram.set('client_secret', process.env.CLIENT_SECRET);
+Instagram.set('callback_url', 'http://curb-your-litter.herokuapp.com/callback');
+Instagram.set('redirect_uri', 'http://curb-your-litter.herokuapp.com:5000');
+Instagram.set('maxSockets', 10);
+
+Instagram.subscriptions.subscribe({
+  object: 'tag',
+  object_id: 'NewEngland',
+  aspect: 'media',
+  callback_url: 'http://curb-your-litter.herokuapp.com/callback',
+  type: 'subscription',
+  id: '#'
 });
 
-var redirect_uri = 'http://curb-your-litter.com/handleauth';
+exports.callback = function(req, res){
+    var handshake =  Instagram.subscriptions.handshake(req, res);
+    console.log(handshake);
+};      
 
-exports.authorize_user = function(req, res) {
-  res.redirect(api.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
-};
-
-exports.handleauth = function(req, res) {
-  api.authorize_user(req.query.code, redirect_uri, function(err, result) {
-    if (err) {
-      console.log(err.body);
-      res.send("Didn't work");
-    } else {
-      console.log('Yay! Access token is ' + result.access_token);
-      res.send('You made it!!');
-    }
-  });
-};
-
-        
 /*
 	GET /instagram
 */
 exports.instagram = function(req, res){
-/*
-	var hd1 = function(err, medias, pagination, remaining, limit){
-		if(pagination.next) {
-			pagination.next(hd1, {'count': 10});
-		}
-	};
-*/
+  Instagram.tags.recent({
+      name: 'newengland',
+      complete: function(data) {
+      	var templateData = {
+	      	'title' : 'Instagram Images #NewEngland',
+	      	'data' : data,
+      	}
+        res.render('instagram.html', templateData);
+      }
+  });
+};
 
-	api.tag_media_recent('NewEngland', function(err, medias, pagination, remaining, limit) {
-		console.log(err);
-/*
-		for(i=0; medias.length; i++){
-			if (medias[i].location != null){
-				console.log(medias[i].location.latitude);				
-			}
+exports.post_callback = function(req, res) {
+	console.log('called back');
+    var data = req.body;
 
-			//console.log(medias[i].images.standard_resolution.url);
-		};
-*/
-		var templateData = {
-			'title' : 'Instagram Images #NewEngland',
-			'data' : medias,
-		}
-		res.render('instagram.html', templateData);
-	});
+    data.forEach(function(tag) {
+      var url = 'https://api.instagram.com/v1/tags/' + tag.object_id + '/media/recent?client_id=479edbf0004c42758987cf0244afd3ef';
+      sendMessage(url);
 
-}
+    });
+    res.end();
+};

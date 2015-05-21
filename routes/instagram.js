@@ -1,5 +1,3 @@
-var io = require('socket.io').listen(app.listen(port));
-
 Instagram = require('instagram-node-lib');
 
 Instagram.set('client_id', process.env.CLIENT_ID);
@@ -48,7 +46,3 @@ exports.post_callback = function(req, res) {
     });
     res.end();
 };
-
-function sendMessage(url) {
-  io.sockets.emit('show', { show: url });
-}

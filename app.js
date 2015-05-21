@@ -69,12 +69,6 @@ app.get('/callback', instagram.callback);
 app.post('/callback', instagram.post_callback);
 
 
-
-
-/************* *************/
-/*
-var port = process.env.PORT || 5000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
-*/
+function sendMessage(url) {
+  io.sockets.emit('show', { show: url });
+}

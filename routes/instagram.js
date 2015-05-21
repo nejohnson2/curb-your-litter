@@ -18,7 +18,6 @@ Instagram.subscriptions.subscribe({
 
 exports.callback = function(req, res){
     var handshake =  Instagram.subscriptions.handshake(req, res);
-    console.log(handshake);
 };      
 
 /*
@@ -43,9 +42,12 @@ exports.post_callback = function(req, res) {
 
     data.forEach(function(tag) {
       var url = 'https://api.instagram.com/v1/tags/' + tag.object_id + '/media/recent?client_id=479edbf0004c42758987cf0244afd3ef';
-      console.log(url);
-      console.log(tag);
+	  sendMessage(url);
 
     });
     res.end();
 };
+
+function sendMessage(url) {
+  io.sockets.emit('show', { show: url });
+}

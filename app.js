@@ -1,12 +1,26 @@
 var express = require('express');
-var path = require('path');
-
 var app = express();
+var path = require('path');
+var port = process.env.PORT || 5000;
+
+var io = require('socket.io').listen(app.listen(port));
 
 var routes = require('./routes/index.js');	
 var instagram = require('./routes/instagram.js');	
 
-/* var api = require('instagram-node').instagram() */
+// https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
+/*
+io.configure(function () {
+  io.set("transports", [
+    'websocket'
+    , 'xhr-polling'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'jsonp-polling'
+  ]);
+  io.set("polling duration", 10);
+});
+*/
 
 app.configure(function(){
 
@@ -27,6 +41,20 @@ app.configure(function(){
 	app.use(express.static(path.join(__dirname, 'public')));    
 });
 
+
+/**
+ * On socket.io connection we get the most recent posts
+ * and send to the client side via socket.emit
+ */
+io.sockets.on('connection', function (socket) {
+  Instagram.tags.recent({
+      name: 'lollapalooza',
+      complete: function(data) {
+        socket.emit('firstShow', { firstShow: data });
+      }
+  });
+});
+
 /*
 	Main Page Routes
 */
@@ -44,7 +72,9 @@ app.post('/callback', instagram.post_callback);
 
 
 /************* *************/
+/*
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
+*/

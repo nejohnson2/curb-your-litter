@@ -1,3 +1,7 @@
+/*
+	This is the main javascript file where goodness
+	should be happening.
+*/
 jQuery(document).ready(function(){
 	
 	console.log('ready');

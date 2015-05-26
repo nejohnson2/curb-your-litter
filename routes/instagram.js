@@ -15,10 +15,6 @@ Instagram.subscriptions.subscribe({
   id: '#'
 });
 
-exports.callback = function(req, res){
-    var handshake =  Instagram.subscriptions.handshake(req, res);
-    console.log(handshake);
-};      
 
 /*
 	GET /instagram
@@ -36,24 +32,22 @@ exports.instagram = function(req, res){
       }
   });
 };
-exports.post_callback = function(req, res) {
-	console.log('called back');
-};
 /*
-
-exports.post_callback = function(req, res) {
-	console.log('called back');
-    var data = req.body;
-
-    data.forEach(function(tag) {
-      var url = 'https://api.instagram.com/v1/tags/' + tag.object_id + '/media/recent?client_id=479edbf0004c42758987cf0244afd3ef';
-	  sendMessage(url);
-
-    });
-    res.end();
+	GET /callback
+*/
+exports.callback = function(req, res){
+    var handshake =  Instagram.subscriptions.handshake(req, res);
+    console.log(handshake);
 };
 
-function semdMessage(url) {
-  io.sockets.emit('show', { show: url });
-}
+/* 
+	POST /callback
 */
+exports.post_callback = function(req, res) {
+	console.log('called back');
+	/*
+		This is where instagram will make the post request with new data.
+		Now we need to take that data and send it to the database but only 
+		the part that we need.
+	*/
+};

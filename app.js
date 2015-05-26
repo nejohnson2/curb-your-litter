@@ -1,28 +1,13 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var port = process.env.PORT || 5000;
 
-var io = require('socket.io').listen(app.listen(port));
+//var io = require('socket.io').listen(app.listen(port)); // this is for sockets
 
 var routes = require('./routes/index.js');	
 var instagram = require('./routes/instagram.js');	
 
-//require('./socket.js').configureSocketIOEvents(io);
-
-// https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
-/*
-io.configure(function () {
-  io.set("transports", [
-    'websocket'
-    , 'xhr-polling'
-    , 'flashsocket'
-    , 'htmlfile'
-    , 'jsonp-polling'
-  ]);
-  io.set("polling duration", 10);
-});
-*/
+//require('./socket.js').configureSocketIOEvents(io);  // see socket.js file
 
 app.configure(function(){
 
@@ -53,5 +38,11 @@ app.get('/', routes.main);
 	Instagram Routes
 */
 app.get('/instagram', instagram.instagram);
-app.get('/callback', instagram.callback);
-app.post('/callback', instagram.post_callback);
+app.get('/callback', instagram.callback); 
+app.post('/callback', instagram.post_callback); // route for Instagram subscription
+
+
+var port = process.env.PORT || 5000;
+app.listen(port, function(){
+	console.log("Listening on " + port);
+});

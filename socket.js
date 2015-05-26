@@ -1,4 +1,9 @@
-//socket.js
+/*
+	This exports all of the socket functions for the server.  We
+	are not actually using any of this yet...though it would be 
+	nice if we did.
+*/
+
 module.exports.configureSocketIOEvents = function(io){
 	
 	io.sockets.on('connection', function (socket) {

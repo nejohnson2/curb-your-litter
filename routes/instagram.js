@@ -17,6 +17,7 @@ Instagram.subscriptions.subscribe({
 
 exports.callback = function(req, res){
     var handshake =  Instagram.subscriptions.handshake(req, res);
+    console.log(handshake);
 };      
 
 /*
@@ -30,10 +31,15 @@ exports.instagram = function(req, res){
 	      	'title' : 'Instagram Images #NewEngland',
 	      	'data' : data,
       	}
+      	//io.sockets.emit('first_show', templateData);
         res.render('instagram.html', templateData);
       }
   });
 };
+exports.post_callback = function(req, res) {
+	console.log('called back');
+};
+/*
 
 exports.post_callback = function(req, res) {
 	console.log('called back');
@@ -46,3 +52,8 @@ exports.post_callback = function(req, res) {
     });
     res.end();
 };
+
+function semdMessage(url) {
+  io.sockets.emit('show', { show: url });
+}
+*/

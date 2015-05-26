@@ -1,65 +1,27 @@
-// Write all the Javacript here
-$( document ).ready(function() {
-    // Your code here.
-/*
-	$( "a" ).click(function( event ) {
-	    someFunction();
-	    console.log("you've been clicked");
-	    event.preventDefault();
-	});	
-*/
-	$(".alert").hide();
+jQuery(document).ready(function(){
 	
-});
-
-function someFunction() {
-//    alert( "The link will no longer take you to jquery.com" );
-    console.log("somefuntion");
-}
-
-//This form will request a certain landfill by name
-jQuery("form").submit(function(e){	
-  	// the name form field value
-  	var entry = jQuery("#formEntry").val();
-  	$(".alert").show().fadeOut(3000);
-//  	$(".alert").alert("close");	  	
-  	console.log("Form submitted with value :" + entry);
-
-  	// This is taking the information and posting it to the OpenTrashLab Api.  This fails because the url is mean to GET data....
-/*
-  	$.ajax({
-	  	type: "POST",
-	  	url: "http://www.opentrashlab.com/landfills/data",
-	  	dataType: "json",
-	  	data: {
-		  	landfill : landfill
-	  	},
-       	success : function(response){
-    		// success - for now just log it
-    		console.log("Success : " + response);
-
-    	},
-    	error : function(err){
-    		// do error checking
-    		alert("something went wrong");
-    		console.error(err);
-    	}
-	  	
-  	})
-*/
-/*
-	$.ajax({
-		type: "GET",
-		url: "http://www.opentrashlab.com/landfills/data",
-		dataType: "json",
-		success: function(data) {processData(data)},
-       	error : function(err){
-			// do error checking
-			alert("something went wrong");
-			console.error(err);
-       	}
+	console.log('ready');
+	
+	var socket = io.connect();
+	
+	socket.on('firstShow', function (data) {
+		console.log('first show');
+		console.log(data);
+		//socket.emit('my other event', { my: 'data' });
 	});
-*/  
-
-    e.preventDefault();
+	socket.on('show', function(data) {
+		var url = data.show;
+		console.log(url);
+		console.log('SHOW');
+	
+	    $.ajax({
+	        url: url,
+	        type: 'POST',
+	        crossDomain: true,
+	        dataType: 'jsonp'
+	    }).done(function (data) {
+	        console.log(data);
+	        console.log('who data');
+	    }); 	
+	});
 });

@@ -8,6 +8,8 @@ var io = require('socket.io').listen(app.listen(port));
 var routes = require('./routes/index.js');	
 var instagram = require('./routes/instagram.js');	
 
+//require('./socket.js').configureSocketIOEvents(io);
+
 // https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
 /*
 io.configure(function () {
@@ -41,20 +43,6 @@ app.configure(function(){
 	app.use(express.static(path.join(__dirname, 'public')));    
 });
 
-
-/**
- * On socket.io connection we get the most recent posts
- * and send to the client side via socket.emit
- */
-io.sockets.on('connection', function (socket) {
-  Instagram.tags.recent({
-      name: 'lollapalooza',
-      complete: function(data) {
-        socket.emit('firstShow', { firstShow: data });
-      }
-  });
-});
-
 /*
 	Main Page Routes
 */
@@ -67,8 +55,3 @@ app.get('/', routes.main);
 app.get('/instagram', instagram.instagram);
 app.get('/callback', instagram.callback);
 app.post('/callback', instagram.post_callback);
-
-
-function sendMessage(url) {
-  io.sockets.emit('show', { show: url });
-}

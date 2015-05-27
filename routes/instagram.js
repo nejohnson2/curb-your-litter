@@ -38,7 +38,7 @@ exports.instagram = function(req, res){
 				'image' : obj.images,
 				'id' : obj.id,
 			};
-			console.log(tmp)
+
 //			var insta = new instagramModel(saveData); // new astronaut document
 //			insta.save(); //save to database			
 		});
@@ -71,12 +71,6 @@ exports.post_callback = function(req, res) {
 	
 	var data = req.body;
 
-/*
-    data.forEach(function(tag) {
-      var url = 'https://api.instagram.com/v1/tags/' + tag.object_id + '/media/recent?client_id=479edbf0004c42758987cf0244afd3ef';
-
-    });
-*/
     res.end();
 
 };

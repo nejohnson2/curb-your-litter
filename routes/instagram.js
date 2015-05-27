@@ -22,32 +22,43 @@ Instagram.subscriptions.subscribe({
 	GET /instagram
 */
 exports.instagram = function(req, res){
-  Instagram.tags.recent({
-      name: 'newengland',
-      complete: function(data) {
-      	var templateData = {
+
+	/*
+	
+		Playground
+	
+	*/
+
+	Instagram.tags.recent({
+	  name: 'newengland',
+	  complete: function(data) {
+	  	var templateData = {
 	      	'title' : 'Instagram Images #NewEngland',
 	      	'data' : data,
-      	};
-
-		var saveData = {};
-		data.forEach(function(obj){
-			
-			var tmp = {
-				'location' : obj.location,
-				'image' : obj.images,
-				'id' : obj.id,
-			};
-
-//			var insta = new instagramModel(saveData); // new astronaut document
-//			insta.save(); //save to database			
-		});
+	  	};
 	
-      	//io.sockets.emit('first_show', templateData);
-        res.render('instagram.html', templateData);
-      }
-  });
+	  	//io.sockets.emit('first_show', templateData);
+	    res.render('instagram.html', templateData);
+	  }
+	});
+	// This is what this function will really use.
+	//res.render('BensFile.html');
 };
+/*
+	Get /insta-api
+*/
+exports.instagramApi = function(req, res){
+	/*
+		1. Client requests database data
+		2. Serve gets data from db
+		3. Verify lat/lon
+		4. Generate geojson
+		5. Send to client
+	*/
+
+    res.send(data)
+};
+
 /*
 	GET /callback
 */
@@ -65,12 +76,21 @@ exports.post_callback = function(req, res) {
 		This is where instagram will make the post request with new data.
 		Now we need to take that data and send it to the database but only 
 		the part that we need.
+		
+		1. Take incoming data from instagram and subset
+		2. Save to mongodb
 	*/
 	console.log('called back');
 	console.log(req.body);
 	
 	var data = req.body;
-
+//	var insta = new instagramModel(saveData); // new astronaut document
+//	insta.save(); //save to database
     res.end();
 
 };
+
+function buildGeoJson(incoming_data){
+	
+	
+}

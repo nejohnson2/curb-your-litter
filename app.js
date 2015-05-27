@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var mongoose = require('mongoose');
 
 //var io = require('socket.io').listen(app.listen(port)); // this is for sockets
 
@@ -26,6 +27,9 @@ app.configure(function(){
 
 	app.use(app.router);
 	app.use(express.static(path.join(__dirname, 'public')));    
+	
+	app.db = mongoose.connect(process.env.MONGOLAB_URI);
+	console.log("connected to database");	
 });
 
 /*

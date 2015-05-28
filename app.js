@@ -36,7 +36,7 @@ app.configure(function(){
 	Main Page Routes
 */
 app.get('/', routes.main);
-
+app.get('/map', routes.map);
 
 /*
 	Instagram Routes

@@ -41,7 +41,6 @@ app.get('/map', instagram.map);
 	Instagram Routes
 */
 app.get('/instagram', instagram.instagram);
-app.get('/insta-api', instagram.instagramApi);
 app.get('/callback', instagram.callback); 
 app.post('/callback', instagram.post_callback); // route for Instagram subscription
 

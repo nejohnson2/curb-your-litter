@@ -10,7 +10,7 @@ Instagram.set('maxSockets', 10);
 
 Instagram.subscriptions.subscribe({
   object: 'tag',
-  object_id: 'Greenpoint',
+  object_id: 'CurbYourLitter',
   aspect: 'media',
   callback_url: 'http://curb-your-litter.herokuapp.com/callback',
   type: 'subscription',
@@ -27,38 +27,11 @@ exports.map = function(req,res){
 exports.instagram = function(req, res){
 
 	Instagram.tags.recent({
-	  name: 'Greenpoint',
-	  complete: function(data) {
-		
-		
-	  	// var templateData = {
-	   //    	'title' : 'Instagram Images #Greenpoint',
-	   //    	'data' : data,
-	   //    	'geojson': buildGeoJson(data)
-	  	// };
-	  	//console.log(templateData.geojson)
-	  	//io.sockets.emit('first_show', templateData);
-	  	
-	    //res.render('instagram.html', templateData);
-	    res.json(buildGeoJson(data));
-	  }
+		name: 'CurbYourLitter',
+		complete: function(data) {
+			res.json(buildGeoJson(data));
+	  	}
 	});
-	// This is what this function will really use.
-	//res.render('BensFile.html');
-};
-/*
-	Get /insta-api
-*/
-exports.instagramApi = function(req, res){
-	/*
-		1. Client requests database data
-		2. Serve gets data from db
-		3. Verify lat/lon
-		4. Generate geojson
-		5. Send to client
-	*/
-
-    res.send(data)
 };
 
 /*
@@ -86,6 +59,7 @@ exports.post_callback = function(req, res) {
 	//console.log(req.body);
 	
 	var data = req.body;
+	console.log(data)
 //	var insta = new instagramModel(saveData); // new astronaut document
 //	insta.save(); //save to database
     res.end();

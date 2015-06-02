@@ -55,13 +55,13 @@ exports.post_callback = function(req, res) {
 		1. Take incoming data from instagram and subset
 		2. Save to mongodb
 	*/
-	//console.log('called back');
-	//console.log(req.body);
+	console.log('called back');
+	console.log(req.body.data);
 	
 	var data = req.body;
-	console.log(data)
-	var insta = new instagramModel(saveData); // new astronaut document
-	insta.save(); //save to database
+	//console.log(data)
+	// var insta = new instagramModel(saveData); // new astronaut document
+	// insta.save(); //save to database
     res.end();
 
 };

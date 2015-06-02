@@ -56,7 +56,7 @@ exports.post_callback = function(req, res) {
 		2. Save to mongodb
 	*/
 	console.log('called back');
-	console.log(req.body.data);
+	console.log(req.body);
 	
 	var data = req.body;
 	//console.log(data)

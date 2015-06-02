@@ -1,19 +1,17 @@
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiYmRrYXVmZiIsImEiOiJZQWdTQzJ3In0.moRkdSXmD_TBq0axmrs1VQ';
-var southWest = L.latLng(40.70256978037793, -73.99472236633301),
-    northEast = L.latLng(40.748492426449104, -73.88520240783691),
-    bounds = L.latLngBounds(southWest, northEast);
-    
-var map = L.mapbox.map('map', 'bdkauff.3dc6a933',{maxBounds: bounds})
+
+
+var map = L.mapbox.map('map', 'bdkauff.3dc6a933')
     .setView([40.72755146730012, -73.95103454589844], 14);
 
 var landfills, exports;
 
 // for debugging: get lat lon by clicking map
-map.on('click', function(e) {
-console.log(map.getBounds());
-alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-});
+// map.on('click', function(e) {
+// console.log(map.getBounds());
+// alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+// });
 
 exports = L.mapbox.featureLayer()
 	.loadURL('data/test_500.json')

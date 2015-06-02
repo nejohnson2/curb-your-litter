@@ -60,8 +60,8 @@ exports.post_callback = function(req, res) {
 	
 	var data = req.body;
 	//console.log(data)
-	// var insta = new instagramModel(saveData); // new astronaut document
-	// insta.save(); //save to database
+	var insta = new instagramModel(data); // new astronaut document
+	insta.save(); //save to database
     res.end();
 
 };

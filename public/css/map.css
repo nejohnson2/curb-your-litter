@@ -1,7 +1,7 @@
 body { margin: 0; padding: 0; }
-#left-pane { overflow: auto; background-color: #F49965; font-family: "Helvetica Neue"; position: absolute; top: 0px; right: 0px; z-index: 100; opacity:.98; border-radius: 4px; width: 350px; height:100%; }
-#filters { padding-top: 0px;}
-#map { position: absolute; top: 0; bottom: 0; left:0; width: 100%; }
+#left-pane { overflow: auto; background-color: #F49965; font-family: "Helvetica Neue"; position: absolute; top: 50px; right: 0px; z-index: 100; opacity:.98; border-radius: 4px; width: 350px; height:100%; }
+#filters { padding-top: 50px;}
+#map { position: absolute; top: 0; bottom: 0; left:0; height:100%; width: 100%; }
 .css-icon { width: 0; height: 0; border-top: 30px solid transparent; border-bottom: 30px solid transparent; border-left: 30px solid #ff8888; }
 .leaflet-bar { top:50px; background-color: #fff; border: none;}
 .leaflet-popup-content-wrapper { text-align: center; background:#2c3e50;color:#fff;font-size:16px; line-height:24px;}

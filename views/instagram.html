@@ -1,16 +1,18 @@
 <h2>{{title}}</h2>
 {{pagination.next_max_id}}
 <p> Last photo received: {{pagination.next_min_id}} </p>
+
 <ul style="list-style-type: none;">
 	{{#data}}
 	<li>
 		<img class='insta' src="{{images.standard_resolution.url}}"</img>
 		<p>{{id}}</p>
-		<!-- <p>{{location.latitude}}, {{location.longitude}}</p> -->
+		<p>{{location.latitude}}, {{location.longitude}}</p>
 	</li>
 	{{/data}}
 </ul>
 
+<p>{{geojson.features}}</p>
 <style>
 li{
 	float:left;

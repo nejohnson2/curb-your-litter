@@ -1,7 +1,8 @@
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiYmRrYXVmZiIsImEiOiJZQWdTQzJ3In0.moRkdSXmD_TBq0axmrs1VQ';
+
 var map = L.mapbox.map('map', 'bdkauff.3dc6a933')
-    .setView([40.7114, -73.9470], 14);
+    .setView([40.72755146730012, -73.95103454589844], 14);
 
 var landfills, exports;
 
@@ -16,18 +17,18 @@ exports = L.mapbox.featureLayer()
 
 
 landfills = L.mapbox.featureLayer()
-	.loadURL('data/new_york_landfills.geojson')
+	.loadURL('/instagram')
 	.on('ready', markers)
 	.addTo(map);
 
-  landfills.on('click', function(e){
-    sidebarInfo();
+  landfills.on('mouseover', function(e){
+    sidebarInfo(e);
   });
 
   function markers() {
     landfills.eachLayer(function(marker){
-      marker.bindPopup(marker.feature.properties.fac_state);
-      if (marker.feature.properties.fac_state ==='OH') {
+      marker.bindPopup(marker.feature.properties.time);
+      if (marker.feature.properties.time) {
           marker.setIcon(L.icon(marker.feature.properties.icon));
       } else {
           marker.setIcon(L.icon(marker.feature.properties.icon));
@@ -35,7 +36,7 @@ landfills = L.mapbox.featureLayer()
     })
   }
 
-  function sidebarInfo() {
-    console.log('clicked')
-
-  };
+function sidebarInfo(e) {
+    $('#filters h3').text(e.layer.feature.properties['time']);
+    $('#filters img').attr('src', e.layer.feature.properties['img_hi_res']);
+} ;

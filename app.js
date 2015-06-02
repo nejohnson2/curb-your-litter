@@ -22,22 +22,21 @@ app.configure(function(){
 	app.use(express.methodOverride());
 	    
 	/**** Turn on some debugging tools ****/
-	app.use(express.logger()); // sends messages into the terminal 
+	//app.use(express.logger()); // sends messages into the terminal 
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 
 	app.use(app.router);
 	app.use(express.static(path.join(__dirname, 'public')));    
 	
 	app.db = mongoose.connect(process.env.MONGOLAB_URI);
-	console.log("connected to database");	
+	console.log("connected to database");
 });
 
 /*
 	Main Page Routes
 */
 app.get('/', routes.main);
-app.get('/map', routes.map);
-
+app.get('/map', instagram.map);
 /*
 	Instagram Routes
 */

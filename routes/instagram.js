@@ -10,35 +10,37 @@ Instagram.set('maxSockets', 10);
 
 Instagram.subscriptions.subscribe({
   object: 'tag',
-  object_id: 'NewEngland',
+  object_id: 'Greenpoint',
   aspect: 'media',
   callback_url: 'http://curb-your-litter.herokuapp.com/callback',
   type: 'subscription',
   id: '#'
 });
 
+exports.map = function(req,res){
+	res.render('map.html');
+};
 
 /*
 	GET /instagram
 */
 exports.instagram = function(req, res){
 
-	/*
-	
-		Playground
-	
-	*/
-
 	Instagram.tags.recent({
-	  name: 'newengland',
+	  name: 'Greenpoint',
 	  complete: function(data) {
-	  	var templateData = {
-	      	'title' : 'Instagram Images #NewEngland',
-	      	'data' : data,
-	  	};
-	
+		
+		
+	  	// var templateData = {
+	   //    	'title' : 'Instagram Images #Greenpoint',
+	   //    	'data' : data,
+	   //    	'geojson': buildGeoJson(data)
+	  	// };
+	  	//console.log(templateData.geojson)
 	  	//io.sockets.emit('first_show', templateData);
-	    res.render('instagram.html', templateData);
+	  	
+	    //res.render('instagram.html', templateData);
+	    res.json(buildGeoJson(data));
 	  }
 	});
 	// This is what this function will really use.
@@ -64,8 +66,8 @@ exports.instagramApi = function(req, res){
 */
 exports.callback = function(req, res){
     var handshake =  Instagram.subscriptions.handshake(req, res);
-	console.log("Handshake");
-    console.log(handshake);
+	//console.log("Handshake");
+    //console.log(handshake);
 };
 
 /* 
@@ -80,8 +82,8 @@ exports.post_callback = function(req, res) {
 		1. Take incoming data from instagram and subset
 		2. Save to mongodb
 	*/
-	console.log('called back');
-	console.log(req.body);
+	//console.log('called back');
+	//console.log(req.body);
 	
 	var data = req.body;
 //	var insta = new instagramModel(saveData); // new astronaut document
@@ -91,6 +93,33 @@ exports.post_callback = function(req, res) {
 };
 
 function buildGeoJson(incoming_data){
-	
-	
-}
+
+var geojson = {};
+geojson['type'] = 'FeatureCollection';
+geojson['features'] = [];
+
+for (var each in incoming_data){
+	if(incoming_data[each].location != null) {
+		var newFeature = {
+	    	"type": "Feature",
+	    	"geometry": {
+	     	"type": "Point",
+	      	"coordinates": [incoming_data[each].location.longitude, incoming_data[each].location.latitude
+	    ]},
+	    "properties": {
+	      "img_hi_res": incoming_data[each].images.standard_resolution.url,
+	      "img_lo_res": incoming_data[each].images.low_resolution.url,
+	      "img_thumb": incoming_data[each].images.thumbnail.url,
+	      "time": incoming_data[each].created_time,
+	      "icon": {"iconUrl": "http://png-2.findicons.com/files/icons/1508/sketchcons_x/128/trash.png","iconSize": [35,35],"iconAnchor": [25, 25],"popupAnchor": [0, -25],"className": "customMaker"}
+	    	}
+	  }
+	  geojson['features'].push(newFeature);
+	};
+};
+//console.log(geojson);
+return geojson;
+};
+
+
+

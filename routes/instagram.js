@@ -58,7 +58,7 @@ exports.post_callback = function(req, res) {
 	console.log('called back');
 	//console.log(req.body);
 	
-	var data = req.body[0].changed_aspect;
+	var data = req.body[0].data;
 	console.log(data)
 	// var insta = new instagramModel(data); // new astronaut document
 	// insta.save(); //save to database

@@ -56,10 +56,10 @@ exports.post_callback = function(req, res) {
 		2. Save to mongodb
 	*/
 	console.log('called back');
-	console.log(req.body);
+	//console.log(req.body);
 	
 	var data = req.body[0].data;
-	//console.log(data)
+	console.log(data)
 	// var insta = new instagramModel(data); // new astronaut document
 	// insta.save(); //save to database
     res.end();

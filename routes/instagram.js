@@ -17,6 +17,7 @@ Instagram.subscriptions.subscribe({
   id: '#'
 });
 
+
 exports.map = function(req,res){
 	
 	res.render('map.html');
@@ -37,13 +38,40 @@ exports.instagram = function(req, res){
 
 exports.harvester = function(req,res){
 	
+	var currentMostRecent;
+
 	Instagram.tags.recent({
 		name: 'Greenpoint',
 		complete: function(data, pagination) {
-			console.log(data)
 			var page = pagination;
-			console.log(page)
-			res.json(buildGeoJson(data));
+			
+			console.log(pagination);
+			
+			for(each in data) {
+				if(data[each].location != null){
+					var dbDocument = {
+						coordinates : [ data[each].location.longitude, data[each].location.latitude ],
+						img_hi_res : data[each].images.standard_resolution.url,
+						img_lo_res : data[each].images.low_resolution.url,
+						img_thumb : data[each].images.thumbnail.url,
+						time : data[each].created_time
+					};
+				};
+			console.log(dbDocument)
+			var insta = new instagramModel(dbDocument); // new db document
+			insta.save(); //save to database
+			};
+			
+
+
+			var templateData = {
+				page:page,
+				data:data
+			};
+		
+
+			//console.log(page)
+			res.render("instagram.html", templateData);
 	  	}
 	});
 
@@ -114,7 +142,6 @@ function buildGeoJson(incoming_data){
 		  geojson['features'].push(newFeature);
 		};
 	};
-	//console.log(geojson);
 	return geojson;
 	};
 

@@ -22,7 +22,7 @@ app.configure(function(){
 	app.use(express.methodOverride());
 	    
 	/**** Turn on some debugging tools ****/
-	//app.use(express.logger()); // sends messages into the terminal 
+	app.use(express.logger()); // sends messages into the terminal 
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 
 	app.use(app.router);

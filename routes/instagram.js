@@ -30,13 +30,31 @@ exports.instagram = function(req, res){
 	Instagram.tags.recent({
 		name: 'Greenpoint',
 		complete: function(data, pagination) {
+			res.json(buildGeoJson(data));
+	  	}
+	});
+};
+
+exports.harvester = function(req,res){
+	
+	Instagram.tags.recent({
+		name: 'Greenpoint',
+		complete: function(data, pagination) {
 			console.log(data)
 			var page = pagination;
 			console.log(page)
 			res.json(buildGeoJson(data));
 	  	}
 	});
+
+
+
+
 };
+
+
+
+
 
 /*
 	GET /callback

@@ -42,11 +42,12 @@ function harvester() {
 		name: 'Greenpoint',
 		complete: function(data,pagination) {
 			//regex strips the underscore and additional numbers from the ID that comes back
-			var regex = '/^[^_]+(?=_)/g'
+			
 			var page = pagination;
 			console.log(page)
 			for(each in data) {
 				if(data[each].location != null){
+					var regex = '/^[^_]+(?=_)/g';
 					var dbDocument = {
 						id : regex.exec(data[each].id),
 						coordinates : [ data[each].location.longitude, data[each].location.latitude ],

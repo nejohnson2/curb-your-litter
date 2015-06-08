@@ -50,7 +50,7 @@ function harvester() {
 				if(data[each].location != null){
 					var regex = /^[^_]+(?=_)/g;
 					var dbDocument = {
-						id : regex.exec(String(data[each].id)),
+						id : regex.exec(String(data[each].id))[0],
 						coordinates : [ data[each].location.longitude, data[each].location.latitude ],
 						img_hi_res : data[each].images.standard_resolution.url,
 						img_lo_res : data[each].images.low_resolution.url,
@@ -83,13 +83,13 @@ function getNewest(id) {
 			
 			var page = pagination;
 			//console.log(page)
-			console.log(data)
+			//console.log(data)
 			for(each in data) {
 				if(data[each].location != null){
 					//regex strips some non-relevant stuff from the ID that comes back
 					var regex = /^[^_]+(?=_)/g;
 					var dbDocument = {
-						id : regex.exec(String(data[each].id)),
+						id : regex.exec(String(data[each].id))[0],
 						coordinates : [ data[each].location.longitude, data[each].location.latitude ],
 						img_hi_res : data[each].images.standard_resolution.url,
 						img_lo_res : data[each].images.low_resolution.url,

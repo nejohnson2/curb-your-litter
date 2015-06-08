@@ -29,7 +29,7 @@ exports.map = function(req,res){
 exports.instagram = function(req, res){
 
 	Instagram.tags.recent({
-		name: 'cyltesttest',
+		name: '',
 		complete: function(data, pagination) {
 			res.json(buildGeoJson(data));
 	  	}
@@ -39,7 +39,7 @@ exports.instagram = function(req, res){
 function harvester() {
 
 	Instagram.tags.recent({
-		name: 'cyltesttest',
+		name: '',
 		complete: function(data,pagination) {
 			//regex strips the underscore and additional numbers from the ID that comes back
 			
@@ -66,7 +66,7 @@ function harvester() {
 				 //save to database
 				insta.save(function(err){
 					if(err) { console.log(err) }
-					else { console.log("saved 20 photos to database") }
+					else { console.log("saved harvested photos to database") }
 				});
 			};	
 		}
@@ -76,7 +76,7 @@ function harvester() {
 function getNewest(id) {
 
 	Instagram.tags.recent({
-		name: 'cyltesttest',
+		name: '',
 		MAX_TAG_ID: id,
 		complete: function(data,pagination) {
 			
@@ -106,7 +106,7 @@ function getNewest(id) {
 				 //save to database
 				insta.save(function(err){
 					if(err) { console.log(err) }
-					else { console.log("saved "+ dbDocument.id + "to database" ) }
+					else { console.log("saved "+ dbDocument.id + " to database" ) }
 				});
 			};	
 		}

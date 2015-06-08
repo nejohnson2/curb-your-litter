@@ -38,18 +38,17 @@ exports.instagram = function(req, res){
 
 exports.harvester = function(req,res){
 	
-	var currentMostRecent;
-
 	Instagram.tags.recent({
 		name: 'Greenpoint',
 		complete: function(data, pagination) {
 			var page = pagination;
 			
-			console.log(pagination);
+			//console.log(pagination);
 			
 			for(each in data) {
 				if(data[each].location != null){
 					var dbDocument = {
+						id : data[each].id,
 						coordinates : [ data[each].location.longitude, data[each].location.latitude ],
 						img_hi_res : data[each].images.standard_resolution.url,
 						img_lo_res : data[each].images.low_resolution.url,
@@ -57,11 +56,18 @@ exports.harvester = function(req,res){
 						time : data[each].created_time
 					};
 				};
-			console.log(dbDocument)
-			var insta = new instagramModel(dbDocument); // new db document
-			insta.save(); //save to database
-			};
+
+				//console.log(dbDocument)
+				
+				var insta = new instagramModel(dbDocument); // new db document
+				 //save to database
+				insta.save(function(err){
+					if(err) {console.log(err)};
+				});
 			
+
+			};
+
 
 
 			var templateData = {
@@ -74,13 +80,27 @@ exports.harvester = function(req,res){
 			res.render("instagram.html", templateData);
 	  	}
 	});
-
-
-
-
 };
 
 
+function mostRecent() {
+	console.log("Getting information on most recent photo")
+	var filter ={};
+	var fields = '';
+
+	instagramModel.findOne({},{},{sort:{ 'created-at':-1 } },function(err,mostRecent){
+	    if (err) {
+	    	console.error('uhoh something went wrong');
+	    	console.error(err);
+		}
+		if (mostRecent == null) {
+	    	console.log("no astronauts found");
+		} else {
+	    	console.log("found most recent photo!");
+	    	console.log(mostRecent);
+		}
+	});
+};
 
 
 
@@ -106,6 +126,7 @@ exports.post_callback = function(req, res) {
 		2. Save to mongodb
 	*/
 	console.log('called back');
+	mostRecent();
 	//console.log(req.body);
 	
 	var data = req.body;
@@ -132,6 +153,7 @@ function buildGeoJson(incoming_data){
 		      	"coordinates": [incoming_data[each].location.longitude, incoming_data[each].location.latitude
 		    ]},
 		    "properties": {
+		      "id": incoming_data[each].id,	
 		      "img_hi_res": incoming_data[each].images.standard_resolution.url,
 		      "img_lo_res": incoming_data[each].images.low_resolution.url,
 		      "img_thumb": incoming_data[each].images.thumbnail.url,

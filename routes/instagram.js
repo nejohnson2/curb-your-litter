@@ -131,7 +131,7 @@ function mostRecent() {
 	    	harvester();
 		} else {
 	    	console.log("found most recent photo!");
-	    	getNewest(record.id);
+	    	//getNewest(record.id);
 	    	
 		}
 	});

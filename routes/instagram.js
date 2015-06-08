@@ -48,7 +48,7 @@ function harvester() {
 			console.log()
 			for(each in data) {
 				if(data[each].location != null){
-					var regex = '/^[^_]+(?=_)/g';
+					var regex = /^[^_]+(?=_)/g;
 					var dbDocument = {
 						id : regex.exec(String(data[each].id)),
 						coordinates : [ data[each].location.longitude, data[each].location.latitude ],

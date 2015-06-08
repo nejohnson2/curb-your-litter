@@ -60,7 +60,8 @@ function harvester() {
 				var insta = new instagramModel(dbDocument); // new db document
 				 //save to database
 				insta.save(function(err){
-					if(err) { console.log(err) };
+					if(err) { console.log(err) }
+					else { console.log("saved 20 photos to database") }
 				});
 			};	
 		}

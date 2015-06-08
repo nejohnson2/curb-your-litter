@@ -50,7 +50,7 @@ function harvester() {
 				if(data[each].location != null){
 					var regex = /^[^_]+(?=_)/g;
 					var dbDocument = {
-						id : regex.exec(String(data[each].id))[0],
+						id : regex.exec(String(data[each].id)),
 						coordinates : [ data[each].location.longitude, data[each].location.latitude ],
 						img_hi_res : data[each].images.standard_resolution.url,
 						img_lo_res : data[each].images.low_resolution.url,
@@ -72,51 +72,6 @@ function harvester() {
 		}
 	});
 };
-
-function getNewestPhotos() {
-
-	Instagram.tags.recent({
-		name: 'Greenpoint',
-
-		complete: function(data,pagination) {
-			//regex strips the underscore and additional numbers from the ID that comes back
-			
-			var page = pagination;
-			console.log(page)
-			console.log()
-			for(each in data) {
-				if(data[each].location != null){
-					var regex = /^[^_]+(?=_)/g;
-					var dbDocument = {
-						id : regex.exec(String(data[each].id))[0],
-						coordinates : [ data[each].location.longitude, data[each].location.latitude ],
-						img_hi_res : data[each].images.standard_resolution.url,
-						img_lo_res : data[each].images.low_resolution.url,
-						img_thumb : data[each].images.thumbnail.url,
-						time : data[each].created_time
-					};
-				};
-
-
-				//console.log(dbDocument)
-				
-				var insta = new instagramModel(dbDocument); // new db document
-				 //save to database
-				insta.save(function(err){
-					if(err) { console.log(err) }
-					else { console.log("saved 20 photos to database") }
-				});
-			};	
-		}
-	});
-};
-
-
-
-
-
-};
-
 
 function mostRecent() {
 	console.log("Getting information on most recent photo")
@@ -125,7 +80,7 @@ function mostRecent() {
 
 	instagramModel.findOne({},{},{sort:{ 'created-at':-1 } },function(err,mostRecent){
 	    if (err) {
-	    	console.error('Sorry, something went wrong');
+	    	console.error('uhoh something went wrong');
 	    	console.error(err);
 		}
 		if (mostRecent == null) {

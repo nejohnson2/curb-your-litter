@@ -62,12 +62,12 @@ function harvester() {
 
 				//console.log(dbDocument)
 				
-				var insta = new instagramModel(dbDocument); // new db document
-				 //save to database
-				insta.save(function(err){
-					if(err) { console.log(err) }
-					else { console.log("saved harvested photos " + dbDocument.id) }
-				});
+				// var insta = new instagramModel(dbDocument); // new db document
+				//  //save to database
+				// insta.save(function(err){
+				// 	if(err) { console.log(err) }
+				// 	else { console.log("saved harvested photos " + dbDocument.id) }
+				// });
 			};	
 		}
 	});
@@ -83,7 +83,7 @@ function getNewest(id) {
 			
 			var page = pagination;
 			//console.log(page)
-			//console.log(data)
+			console.log(data)
 			for(each in data) {
 				if(data[each].location != null){
 					console.log(data[each].id);
@@ -102,12 +102,12 @@ function getNewest(id) {
 
 				//console.log(dbDocument.id)
 				
-				var insta = new instagramModel(dbDocument); // new db document
-				 //save to database
-				insta.save(function(err){
-					if(err) { console.log(err) }
-					else { console.log("saved newer photos " + dbDocument.id) }
-				});
+				// var insta = new instagramModel(dbDocument); // new db document
+				//  //save to database
+				// insta.save(function(err){
+				// 	if(err) { console.log(err) }
+				// 	else { console.log("saved newer photos " + dbDocument.id) }
+				// });
 			};	
 		}
 	});

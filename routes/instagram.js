@@ -50,7 +50,7 @@ function harvester() {
 				if(data[each].location != null){
 					var regex = /^[^_]+(?=_)/g;
 					var dbDocument = {
-						id : regex.exec(String(data[each].id)),
+						id : regex.exec(String(data[each].id))[0],
 						coordinates : [ data[each].location.longitude, data[each].location.latitude ],
 						img_hi_res : data[each].images.standard_resolution.url,
 						img_lo_res : data[each].images.low_resolution.url,

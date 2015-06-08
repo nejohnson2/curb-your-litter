@@ -83,9 +83,10 @@ function getNewest(id) {
 			
 			var page = pagination;
 			//console.log(page)
-			
+			console.log(data)
 			for(each in data) {
 				if(data[each].location != null){
+					console.log(data[each].id
 					//regex strips some non-relevant stuff from the ID that comes back
 					var regex = /^[^_]+(?=_)/g;
 					var dbDocument = {
@@ -99,7 +100,7 @@ function getNewest(id) {
 				};
 
 
-				console.log(dbDocument.id)
+				//console.log(dbDocument.id)
 				
 				// var insta = new instagramModel(dbDocument); // new db document
 				//  //save to database

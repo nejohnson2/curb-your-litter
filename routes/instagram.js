@@ -73,11 +73,11 @@ function harvester() {
 	});
 };
 
-function getNewest() {
+function getNewest(id) {
 
 	Instagram.tags.recent({
 		name: 'Greenpoint',
-		MAX_TAG_ID: mostRecent(),
+		MAX_TAG_ID: id,
 		complete: function(data,pagination) {
 			
 			
@@ -121,17 +121,18 @@ function mostRecent() {
 	var filter ={};
 	var fields = '';
 
-	instagramModel.findOne({},{},{sort:{ 'created-at':-1 } },function(err,mostRecent){
+	instagramModel.findOne({},{},{sort:{ 'created-at':-1 } },function(err, record){
 	    if (err) {
 	    	console.error('uhoh something went wrong');
 	    	console.error(err);
 		}
-		if (mostRecent == null) {
+		if (record == null) {
 	    	console.log("there were no photos in the database. Harvesting some now!")
 	    	harvester();
 		} else {
 	    	console.log("found most recent photo!");
-	    	return mostRecent.id;
+	    	getNewest(record.id);
+	    	
 		}
 	});
 };

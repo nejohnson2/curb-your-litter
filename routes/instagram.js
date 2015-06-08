@@ -119,8 +119,6 @@ function getNewest(id) {
 
 function mostRecent() {
 	console.log("Getting information on most recent photo")
-	var filter ={};
-	var fields = '';
 
 	instagramModel.findOne({},{},{sort:{ 'created-at':-1 } },function(err, record){
 	    if (err) {
@@ -131,7 +129,7 @@ function mostRecent() {
 	    	console.log("there were no photos in the database. Harvesting some now!")
 	    	harvester();
 		} else {
-	    	console.log("found most recent photo!");
+	    	console.log("found most recent photo, with id: " + record.id);
 	    	getNewest(record.id);
 	    	
 		}
@@ -167,7 +165,7 @@ exports.post_callback = function(req, res) {
 	
 	var data = req.body;
 
-	console.log(data)
+	//console.log(data)
 	// var insta = new instagramModel(data); // new astronaut document
 	// insta.save(); //save to database
     res.end();

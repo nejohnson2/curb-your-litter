@@ -73,7 +73,7 @@ function harvester() {
 	});
 };
 
-function getNewest(id) {
+function getNewest(id) {;
 
 	Instagram.tags.recent({
 		name: 'Greenpoint',

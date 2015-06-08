@@ -41,7 +41,8 @@ function harvester() {
 	Instagram.tags.recent({
 		name: 'Greenpoint',
 		complete: function(data,pagination) {
-			console.log(pagination)
+			var page = pagination;
+			console.log(page)
 			for(each in data) {
 				if(data[each].location != null){
 					var dbDocument = {

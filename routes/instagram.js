@@ -94,7 +94,8 @@ function mostRecent() {
 	    	console.error(err);
 		}
 		if (mostRecent == null) {
-	    	console.log("no astronauts found");
+	    	console.log("there were no photos in the database. Harvesting some now!")
+	    	exports.harvester();
 		} else {
 	    	console.log("found most recent photo!");
 	    	console.log(mostRecent);

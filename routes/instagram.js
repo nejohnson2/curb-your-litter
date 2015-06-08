@@ -105,7 +105,7 @@ function getNewest(id) {
 				 //save to database
 				insta.save(function(err){
 					if(err) { console.log(err) }
-					else { console.log("saved all new photos to database") }
+					else { console.log("saved "+ dbDocument.id "to database" ) }
 				});
 			};	
 		}
@@ -131,7 +131,7 @@ function mostRecent() {
 	    	harvester();
 		} else {
 	    	console.log("found most recent photo!");
-	    	//getNewest(record.id);
+	    	getNewest(record.id);
 	    	
 		}
 	});

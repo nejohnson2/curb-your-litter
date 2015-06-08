@@ -88,7 +88,7 @@ function mostRecent() {
 	    	harvester();
 		} else {
 	    	console.log("found most recent photo!");
-	    	console.log(mostRecent);
+	    	console.log(mostRecent.id);
 		}
 	});
 };

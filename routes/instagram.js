@@ -45,7 +45,6 @@ function harvester() {
 			
 			var page = pagination;
 			console.log(page)
-			console.log()
 			for(each in data) {
 				if(data[each].location != null){
 					var regex = /^[^_]+(?=_)/g;
@@ -58,12 +57,9 @@ function harvester() {
 						time : data[each].created_time
 					};
 				};
-
-
-				//console.log(dbDocument)
 				
-				// var insta = new instagramModel(dbDocument); // new db document
-				//  //save to database
+				var insta = new instagramModel(dbDocument); // new db document
+				 //save to database
 				// insta.save(function(err){
 				// 	if(err) { console.log(err) }
 				// 	else { console.log("saved harvested photos " + dbDocument.id) }
@@ -86,7 +82,6 @@ function getNewest(id) {
 			console.log(data)
 			for(each in data) {
 				if(data[each].location != null){
-					console.log(data[each].id);
 					//regex strips some non-relevant stuff from the ID that comes back
 					var regex = /^[^_]+(?=_)/g;
 					var dbDocument = {
@@ -98,12 +93,9 @@ function getNewest(id) {
 						time : data[each].created_time
 					};
 				};
-
-
-				//console.log(dbDocument.id)
 				
-				// var insta = new instagramModel(dbDocument); // new db document
-				//  //save to database
+				var insta = new instagramModel(dbDocument); // new db document
+				 //save to database
 				// insta.save(function(err){
 				// 	if(err) { console.log(err) }
 				// 	else { console.log("saved newer photos " + dbDocument.id) }
@@ -160,16 +152,11 @@ exports.post_callback = function(req, res) {
 		1. Take incoming data from instagram and subset
 		2. Save to mongodb
 	*/
-	console.log('called back');
+	console.log('POST from Instagram ocurred');
 	mostRecent();
-	//console.log(req.body);
 	
 	var data = req.body;
-
-	//console.log(data)
-	// var insta = new instagramModel(data); // new astronaut document
-	// insta.save(); //save to database
-    res.end("Thanks!");
+    res.send("Thanks!");
 
 };
 

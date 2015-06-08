@@ -40,7 +40,7 @@ app.get('/map', instagram.map);
 /*
 	Instagram Routes
 */
-app.get('/harvester', instagram.harvester);
+//app.get('/harvester', instagram.harvester);
 app.get('/instagram', instagram.instagram);
 app.get('/callback', instagram.callback); 
 app.post('/callback', instagram.post_callback); // route for Instagram subscription

@@ -36,15 +36,12 @@ exports.instagram = function(req, res){
 	});
 };
 
-exports.harvester = function(req,res){
+function harvester() {
 	
 	Instagram.tags.recent({
 		name: 'Greenpoint',
-		complete: function(data, pagination) {
-			var page = pagination;
-			
-			//console.log(pagination);
-			
+		complete: function(data) {
+
 			for(each in data) {
 				if(data[each].location != null){
 					var dbDocument = {
@@ -57,28 +54,16 @@ exports.harvester = function(req,res){
 					};
 				};
 
+
 				//console.log(dbDocument)
 				
 				var insta = new instagramModel(dbDocument); // new db document
 				 //save to database
 				insta.save(function(err){
-					if(err) {console.log(err)};
+					if(err) { console.log(err) };
 				});
-			
-
-			};
-
-
-
-			var templateData = {
-				page:page,
-				data:data
-			};
-		
-
-			//console.log(page)
-			res.render("instagram.html", templateData);
-	  	}
+			};	
+		}
 	});
 };
 
@@ -95,7 +80,7 @@ function mostRecent() {
 		}
 		if (mostRecent == null) {
 	    	console.log("there were no photos in the database. Harvesting some now!")
-	    	exports.harvester();
+	    	harvester();
 		} else {
 	    	console.log("found most recent photo!");
 	    	console.log(mostRecent);

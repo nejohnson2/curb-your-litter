@@ -37,7 +37,7 @@ exports.instagram = function(req, res){
 };
 
 function harvester() {
-	
+
 	Instagram.tags.recent({
 		name: 'Greenpoint',
 		complete: function(data,pagination) {
@@ -73,6 +73,49 @@ function harvester() {
 	});
 };
 
+function getNewest() {
+
+	Instagram.tags.recent({
+		name: 'Greenpoint',
+		MAX_TAG_ID: mostRecent(),
+		complete: function(data,pagination) {
+			
+			
+			var page = pagination;
+			console.log(page)
+			console.log()
+			for(each in data) {
+				if(data[each].location != null){
+					//regex strips some non-relevant stuff from the ID that comes back
+					var regex = /^[^_]+(?=_)/g;
+					var dbDocument = {
+						id : regex.exec(String(data[each].id)),
+						coordinates : [ data[each].location.longitude, data[each].location.latitude ],
+						img_hi_res : data[each].images.standard_resolution.url,
+						img_lo_res : data[each].images.low_resolution.url,
+						img_thumb : data[each].images.thumbnail.url,
+						time : data[each].created_time
+					};
+				};
+
+
+				//console.log(dbDocument)
+				
+				var insta = new instagramModel(dbDocument); // new db document
+				 //save to database
+				insta.save(function(err){
+					if(err) { console.log(err) }
+					else { console.log("saved all new photos to database") }
+				});
+			};	
+		}
+	});
+};
+
+
+
+
+
 function mostRecent() {
 	console.log("Getting information on most recent photo")
 	var filter ={};
@@ -88,7 +131,7 @@ function mostRecent() {
 	    	harvester();
 		} else {
 	    	console.log("found most recent photo!");
-	    	console.log(mostRecent.id);
+	    	return mostRecent.id;
 		}
 	});
 };

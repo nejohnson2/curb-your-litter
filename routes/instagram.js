@@ -30,7 +30,7 @@ exports.instagram = function(req, res){
 
 	Instagram.tags.recent({
 		name: 'cyltesttest',
-		complete: function(data, pagination) {
+		complete: function(data) {
 			res.json(buildGeoJson(data));
 	  	}
 	});
@@ -56,6 +56,7 @@ function harvester() {
 					};
 				};
 				console.log("Already existing photos added to DB:" + dbDocument.id)
+				
 				var insta = new instagramModel(dbDocument); // new db document
 				 //save to database
 				// insta.save(function(err){
@@ -89,6 +90,7 @@ function getNewest(id) {
 					};
 				};
 				console.log("Newest photos added to DB:" + dbDocument.id)
+				
 				var insta = new instagramModel(dbDocument); // new db document
 				 //save to database
 				// insta.save(function(err){

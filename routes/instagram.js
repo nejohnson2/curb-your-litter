@@ -41,6 +41,7 @@ function harvester() {
 	Instagram.tags.recent({
 		name: 'Greenpoint',
 		complete: function(data,pagination) {
+			//regex strips the underscore and additional numbers from the ID that comes back
 			var regex = '/^[^_]+(?=_)/g'
 			var page = pagination;
 			console.log(page)

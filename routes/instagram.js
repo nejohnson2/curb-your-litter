@@ -83,7 +83,7 @@ function getNewest(id) {
 			
 			var page = pagination;
 			//console.log(page)
-			console.log(data)
+			//console.log(data)
 			for(each in data) {
 				if(data[each].location != null){
 					console.log(data[each].id);

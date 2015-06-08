@@ -102,12 +102,12 @@ function getNewest(id) {
 
 				//console.log(dbDocument.id)
 				
-				// var insta = new instagramModel(dbDocument); // new db document
-				//  //save to database
-				// insta.save(function(err){
-				// 	if(err) { console.log(err) }
-				// 	else { console.log("saved "+ dbDocument.id + "to database" ) }
-				// });
+				var insta = new instagramModel(dbDocument); // new db document
+				 //save to database
+				insta.save(function(err){
+					if(err) { console.log(err) }
+					else { console.log("saved "+ dbDocument.id + "to database" ) }
+				});
 			};	
 		}
 	});

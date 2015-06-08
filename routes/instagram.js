@@ -40,8 +40,8 @@ function harvester() {
 	
 	Instagram.tags.recent({
 		name: 'Greenpoint',
-		complete: function(data) {
-
+		complete: function(data,pagination) {
+			console.log(pagination)
 			for(each in data) {
 				if(data[each].location != null){
 					var dbDocument = {
@@ -66,6 +66,16 @@ function harvester() {
 			};	
 		}
 	});
+};
+
+function getNewestPhotos() {
+
+
+
+
+
+
+
 };
 
 

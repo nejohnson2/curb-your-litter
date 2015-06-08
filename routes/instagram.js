@@ -82,8 +82,8 @@ function getNewest(id) {
 			
 			
 			var page = pagination;
-			console.log(page)
-			console.log()
+			//console.log(page)
+			console.log(data)
 			for(each in data) {
 				if(data[each].location != null){
 					//regex strips some non-relevant stuff from the ID that comes back

@@ -86,7 +86,7 @@ function getNewest(id) {
 			console.log(data)
 			for(each in data) {
 				if(data[each].location != null){
-					console.log(data[each].id
+					console.log(data[each].id);
 					//regex strips some non-relevant stuff from the ID that comes back
 					var regex = /^[^_]+(?=_)/g;
 					var dbDocument = {

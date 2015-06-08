@@ -66,7 +66,7 @@ function harvester() {
 				 //save to database
 				insta.save(function(err){
 					if(err) { console.log(err) }
-					else { console.log("saved harvested photos "+ dbDocument.id " to database") }
+					else { console.log("saved harvested photos " + dbDocument.id + " to database") }
 				});
 			};	
 		}
@@ -106,7 +106,7 @@ function getNewest(id) {
 				 //save to database
 				insta.save(function(err){
 					if(err) { console.log(err) }
-					else { console.log("saved newer photos "+ dbDocument.id + " to database" ) }
+					else { console.log("saved newer photos " + dbDocument.id + " to database";) }
 				});
 			};	
 		}

@@ -43,8 +43,6 @@ function harvester() {
 		complete: function(data,pagination) {
 			//regex strips the underscore and additional numbers from the ID that comes back
 			
-			var page = pagination;
-			console.log(page)
 			for(each in data) {
 				if(data[each].location != null){
 					var regex = /^[^_]+(?=_)/g;
@@ -57,7 +55,7 @@ function harvester() {
 						time : data[each].created_time
 					};
 				};
-				
+				console.log("Already existing photos added to DB:" + dbDocument.id)
 				var insta = new instagramModel(dbDocument); // new db document
 				 //save to database
 				// insta.save(function(err){
@@ -76,9 +74,6 @@ function getNewest(id) {
 		MAX_TAG_ID: id,
 		complete: function(data,pagination) {
 			
-			
-			var page = pagination;
-			//console.log(page)
 			console.log(data)
 			for(each in data) {
 				if(data[each].location != null){
@@ -93,7 +88,7 @@ function getNewest(id) {
 						time : data[each].created_time
 					};
 				};
-				
+				console.log("Newest photos added to DB:" + dbDocument.id)
 				var insta = new instagramModel(dbDocument); // new db document
 				 //save to database
 				// insta.save(function(err){

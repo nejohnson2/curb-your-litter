@@ -114,7 +114,7 @@ function mostRecent() {
 		}
 		if (record == null) {
 	    	console.log("There were no photos in the database. Harvesting some now!")
-	    	harvester();
+	    	//harvester();
 		} if(record != null) {
 	    	//console.log("found newest photo in database, with id: " + record.id);
 	    	console.log("getting any new photos after this one.")
@@ -145,10 +145,11 @@ exports.post_callback = function(req, res) {
 		1. Take incoming data from instagram and subset
 		2. Save to mongodb
 	*/
+	var data = req.body;
 	console.log('POST from Instagram ocurred');
 	mostRecent();
 	
-	var data = req.body;
+	
     //res.status(200).send("Thanks!");
 
 };

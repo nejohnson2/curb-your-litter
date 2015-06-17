@@ -117,7 +117,6 @@ function mostRecent() {
 	    	return;
 		} if(record != null) {
 	    	console.log("found most recent photo, with id: " + record.id);
-	    	console.log(record.id);
 	    	getNewest(record.id);
 	    	
 		}

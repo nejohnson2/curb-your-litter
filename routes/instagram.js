@@ -10,7 +10,7 @@ Instagram.set('maxSockets', 10);
 
 Instagram.subscriptions.subscribe({
   object: 'tag',
-  object_id: 'cyltesttest',
+  object_id: 'Greenpoint',
   aspect: 'media',
   callback_url: 'http://curb-your-litter.herokuapp.com/callback',
   type: 'subscription',
@@ -29,7 +29,7 @@ exports.map = function(req,res){
 exports.instagram = function(req, res){
 
 	Instagram.tags.recent({
-		name: 'cyltesttest',
+		name: 'Greenpoint',
 		complete: function(data) {
 			res.json(buildGeoJson(data));
 	  	}
@@ -39,7 +39,7 @@ exports.instagram = function(req, res){
 function harvester() {
 
 	Instagram.tags.recent({
-		name: 'cyltesttest',
+		name: 'Greenpoint',
 		complete: function(data,pagination) {
 			//regex strips the underscore and additional numbers from the ID that comes back
 			
@@ -71,14 +71,16 @@ function harvester() {
 function getNewest(id) {
 
 	Instagram.tags.recent({
-		name: 'cyltesttest',
+		name: 'Greenpoint',
 		MAX_TAG_ID: id,
 		complete: function(data,pagination) {
 			
+			console.log(id)
 			console.log(data)
+			console.log(pagination)
 			for(each in data) {
 				if(data[each].location != null){
-					//regex strips some non-relevant stuff from the ID that comes back
+					//regex strips a non-relevant number string from the ID that comes back
 					var regex = /^[^_]+(?=_)/g;
 					var dbDocument = {
 						id : regex.exec(String(data[each].id))[0],
@@ -103,9 +105,6 @@ function getNewest(id) {
 };
 
 
-
-
-
 function mostRecent() {
 	console.log("Getting information on most recent photo")
 
@@ -125,8 +124,6 @@ function mostRecent() {
 		}
 	});
 };
-
-
 
 /*
 	GET /callback
@@ -150,7 +147,7 @@ exports.post_callback = function(req, res) {
 		2. Save to mongodb
 	*/
 	console.log('POST from Instagram ocurred');
-	mostRecent();
+	//mostRecent();
 	
 	var data = req.body;
     res.status(200).send("Thanks!");

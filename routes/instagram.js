@@ -112,14 +112,14 @@ function mostRecent() {
 	    	console.error('uhoh something went wrong');
 	    	console.error(err);
 		}
-		if (record == null) {
+		else if (record == null) {
 	    	console.log("There were no photos in the database. Harvesting some now!")
-	    	//harvester();
-		} if(record != null) {
+	    	harvester();
+	    	return;
+		} else if(record != null) {
 	    	//console.log("found newest photo in database, with id: " + record.id);
 	    	console.log("getting any new photos after this one.")
-	    	//getNewest(record.id);
-	    	
+	    	getNewest(record.id);
 		}
 	});
 };

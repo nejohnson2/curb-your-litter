@@ -149,7 +149,7 @@ exports.post_callback = function(req, res) {
 	mostRecent();
 	
 	var data = req.body;
-    res.status(200).send("Thanks!");
+    //res.status(200).send("Thanks!");
 
 };
 

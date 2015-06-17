@@ -118,7 +118,7 @@ function mostRecent() {
 		} if(record != null) {
 	    	console.log("found newest photo in database, with id: " + record.id);
 	    	console.log("getting any new photos after this one.")
-	    	getNewest(record.id);
+	    	//getNewest(record.id);
 	    	
 		}
 	});

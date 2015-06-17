@@ -69,13 +69,13 @@ function harvester() {
 };
 
 function getNewest(id) {
-
+	console.log(id)
 	Instagram.tags.recent({
 		name: 'Greenpoint',
 		MAX_TAG_ID: id,
 		complete: function(data,pagination) {
 			
-			console.log(id)
+			
 			console.log(data)
 			console.log(pagination)
 			for(each in data) {

@@ -74,7 +74,7 @@ function getNewest(id) {
 		MAX_TAG_ID: id,
 		complete: function(data,pagination) {
 			
-			console.log(data)
+			//console.log(data)
 			console.log(pagination)
 			for(each in data) {
 				if(data[each].location != null){
@@ -112,11 +112,12 @@ function mostRecent() {
 	    	console.error(err);
 		}
 		if (record == null) {
-	    	console.log("there were no photos in the database. Harvesting some now!")
+	    	console.log("There were no photos in the database. Harvesting some now!")
 	    	harvester();
 	    	return;
 		} if(record != null) {
-	    	console.log("found most recent photo, with id: " + record.id);
+	    	console.log("found newest photo in database, with id: " + record.id);
+	    	console.log("getting any new photos after this one.")
 	    	getNewest(record.id);
 	    	
 		}

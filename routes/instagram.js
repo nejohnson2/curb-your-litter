@@ -30,8 +30,8 @@ exports.instagram = function(req, res){
 
 	instagramModel.find({}, function(err, docs){
 		//res.json(buildGeoJson(docs));
-		console.log(docs);
-		buildGeoJson(docs);
+		console.log(docs[0].coordinates[0])
+		res.json(buildGeoJson(docs));
 	})
 
 
@@ -40,7 +40,7 @@ exports.instagram = function(req, res){
 	Instagram.tags.recent({
 		name: 'cyltesttest',
 		complete: function(data) {
-			res.json(buildGeoJson(data));
+			//res.json(buildGeoJson(data));
 	  	}
 	});
 };
@@ -177,24 +177,22 @@ function buildGeoJson(incoming_data){
 
 	for (var each in incoming_data){
 		console.log(incoming_data[each].id)
-		if(incoming_data[each].location != null) {
 			var newFeature = {
 		    	"type": "Feature",
 		    	"geometry": {
 		     	"type": "Point",
-		      	"coordinates": [incoming_data[each].location.longitude, incoming_data[each].location.latitude
-		    ]},
+		      	"coordinates": [incoming_data[each].coordinates[0], incoming_data[each].coordinates[1]]
+		      },
 		    "properties": {
 		      "id": incoming_data[each].id,	
-		      "img_hi_res": incoming_data[each].images.standard_resolution.url,
-		      "img_lo_res": incoming_data[each].images.low_resolution.url,
-		      "img_thumb": incoming_data[each].images.thumbnail.url,
-		      "time": incoming_data[each].created_time,
+		      "img_hi_res": incoming_data[each].img_hi_res,
+		      "img_lo_res": incoming_data[each].img_lo_res,
+		      "img_thumb": incoming_data[each].img_thumb,
+		      "time": incoming_data[each].time,
 		      "icon": {"iconUrl": "http://png-2.findicons.com/files/icons/1508/sketchcons_x/128/trash.png","iconSize": [35,35],"iconAnchor": [25, 25],"popupAnchor": [0, -25],"className": "customMaker"}
 		    	}
 		  }
 		  geojson['features'].push(newFeature);
-		};
 	};
 	return geojson;
 	};

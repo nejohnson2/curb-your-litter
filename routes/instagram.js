@@ -73,7 +73,7 @@ function getNewest(max_id) {
 	console.log(max_id);
 	Instagram.tags.recent({
 		name: 'cyltesttest',
-		MAX_TAG_ID: id,
+		MAX_TAG_ID: max_id,
 		complete: function(data,pagination) {
 			
 			//console.log(data)

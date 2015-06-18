@@ -47,7 +47,7 @@ function harvester() {
 				if(data[each].location != null){
 					var regex = /^[^_]+(?=_)/g;
 					var dbDocument = {
-						id : regex.exec(data[each].id)[0],
+						id : regex.exec(String(data[each].id))[0],
 						coordinates : [ data[each].location.longitude, data[each].location.latitude ],
 						img_hi_res : data[each].images.standard_resolution.url,
 						img_lo_res : data[each].images.low_resolution.url,
@@ -116,7 +116,8 @@ function mostRecent() {
 	    	console.log("There were no photos in the database. Harvesting some now!")
 	    	harvester();
 		} else if(record != null) {
-	    	console.log("found newest photo in database, with id: " + record.id);
+	    	//console.log("found newest photo in database, with id: " + record.id);
+	    	console.log(record);
 	    	console.log("getting any new photos after this one.")
 	    	getNewest(record.id);
 		}

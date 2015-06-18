@@ -96,10 +96,10 @@ function getNewest(max_id) {
 				
 				var insta = new instagramModel(dbDocument); // new db document
 				//save to database
-				insta.save(function(err){
-					if(err) { console.log(err) }
-					else { console.log("saved newer photos " + dbDocument.id) }
-				});
+				// insta.save(function(err){
+				// 	if(err) { console.log(err) }
+				// 	else { console.log("saved newer photos " + dbDocument.id) }
+				// });
 			};	
 		}
 	});

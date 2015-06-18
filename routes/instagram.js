@@ -72,7 +72,7 @@ function getNewest(id) {
 	console.log("getting newest photos...")
 	Instagram.tags.recent({
 		name: 'Greenpoint',
-		MIN_TAG_ID: id,
+		MAX_TAG_ID: id,
 		complete: function(data,pagination) {
 			
 			//console.log(data)

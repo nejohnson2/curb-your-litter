@@ -68,9 +68,9 @@ function harvester() {
 	});
 };
 
-function getNewest(id) {
+function getNewest(max_id) {
 	console.log("getting newest photos...")
-	console.log(id);
+	console.log(max_id);
 	Instagram.tags.recent({
 		name: 'cyltesttest',
 		MAX_TAG_ID: id,

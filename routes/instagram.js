@@ -122,7 +122,7 @@ function getNewest(max_id) {
 function mostRecent() {
 	console.log("Getting information on most recent photo")
 
-	instagramModel.findOne({},{},{sort:{ '$natural	':-1 } },function(err, record){
+	instagramModel.findOne({},{},{sort:{ 'time':-1 } },function(err, record){
 	    if (err) {
 	    	console.error('uhoh something went wrong');
 	    	//console.error(err);

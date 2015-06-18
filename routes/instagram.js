@@ -110,7 +110,7 @@ function mostRecent() {
 	instagramModel.findOne({},{},{sort:{ 'created-at':-1 } },function(err, record){
 	    if (err) {
 	    	console.error('uhoh something went wrong');
-	    	console.error(err);
+	    	//console.error(err);
 		}
 		else if (record == null) {
 	    	console.log("There were no photos in the database. Harvesting some now!")

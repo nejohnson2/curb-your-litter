@@ -28,6 +28,15 @@ exports.map = function(req,res){
 */
 exports.instagram = function(req, res){
 
+	instagramModel.find({}, function(err, docs){
+		//res.json(buildGeoJson(docs));
+		console.log(docs);
+		buildGeoJson(docs);
+	})
+
+
+
+
 	Instagram.tags.recent({
 		name: 'cyltesttest',
 		complete: function(data) {
@@ -113,7 +122,7 @@ function getNewest(max_id) {
 function mostRecent() {
 	console.log("Getting information on most recent photo")
 
-	instagramModel.findOne({},{},{sort:{ 'created-at':-1 } },function(err, record){
+	instagramModel.findOne({},{},{sort:{ '_id':-1 } },function(err, record){
 	    if (err) {
 	    	console.error('uhoh something went wrong');
 	    	//console.error(err);
@@ -167,6 +176,7 @@ function buildGeoJson(incoming_data){
 	geojson['features'] = [];
 
 	for (var each in incoming_data){
+		console.log(incoming_data[each].id)
 		if(incoming_data[each].location != null) {
 			var newFeature = {
 		    	"type": "Feature",

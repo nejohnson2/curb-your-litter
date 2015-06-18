@@ -97,12 +97,12 @@ function getNewest(max_id) {
 					};
 					console.log("Newest photos added to DB:" + dbDocument.id)
 					
-					// var insta = new instagramModel(dbDocument); // new db document
+					var insta = new instagramModel(dbDocument); // new db document
 					
-					// insta.save(function(err){
-					// 	if(err) { console.log(err) }
-					// 	else { console.log("saved newer photos " + dbDocument.id) }
-					// });
+					insta.save(function(err){
+						if(err) { console.log(err) }
+						else { console.log("saved newer photos " + dbDocument.id) }
+					});
 				};	
 			};
 		}
@@ -156,7 +156,7 @@ exports.post_callback = function(req, res) {
 	mostRecent();
 	
 	
-    //res.status(200).send("Thanks!");
+    res.status(200).send("Thanks!");
 
 };
 

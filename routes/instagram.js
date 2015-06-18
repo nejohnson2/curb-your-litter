@@ -10,7 +10,7 @@ Instagram.set('maxSockets', 10);
 
 Instagram.subscriptions.subscribe({
   object: 'tag',
-  object_id: 'Greenpoint',
+  object_id: 'cyltesttest',
   aspect: 'media',
   callback_url: 'http://curb-your-litter.herokuapp.com/callback',
   type: 'subscription',
@@ -29,7 +29,7 @@ exports.map = function(req,res){
 exports.instagram = function(req, res){
 
 	Instagram.tags.recent({
-		name: 'Greenpoint',
+		name: 'cyltesttest',
 		complete: function(data) {
 			res.json(buildGeoJson(data));
 	  	}
@@ -39,7 +39,7 @@ exports.instagram = function(req, res){
 function harvester() {
 
 	Instagram.tags.recent({
-		name: 'Greenpoint',
+		name: 'cyltesttest',
 		complete: function(data) {
 			//regex strips the underscore and additional numbers from the ID that comes back
 			console.log(data.id)
@@ -71,7 +71,7 @@ function harvester() {
 function getNewest(id) {
 	console.log("getting newest photos...")
 	Instagram.tags.recent({
-		name: 'Greenpoint',
+		name: 'cyltesttest',
 		MAX_TAG_ID: id,
 		complete: function(data,pagination) {
 			

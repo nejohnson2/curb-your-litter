@@ -78,7 +78,7 @@ function getNewest(max_id) {
 			
 			//console.log(data)
 			console.log(pagination)
-			if (pagination.next_min_id != id){
+			if (pagination.next_min_id != max_id){
 				for(each in data) {
 					if(data[each].location != null){
 						//regex strips a non-relevant number string from the ID that comes back

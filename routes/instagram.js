@@ -77,28 +77,30 @@ function getNewest(id) {
 			
 			//console.log(data)
 			console.log(pagination)
-			for(each in data) {
-				if(data[each].location != null){
-					//regex strips a non-relevant number string from the ID that comes back
-					var regex = /^[^_]+(?=_)/g;
-					var dbDocument = {
-						id : regex.exec(String(data[each].id))[0],
-						coordinates : [ data[each].location.longitude, data[each].location.latitude ],
-						img_hi_res : data[each].images.standard_resolution.url,
-						img_lo_res : data[each].images.low_resolution.url,
-						img_thumb : data[each].images.thumbnail.url,
-						time : data[each].created_time
+			if (pagination.next_min_id != id){
+				for(each in data) {
+					if(data[each].location != null){
+						//regex strips a non-relevant number string from the ID that comes back
+						var regex = /^[^_]+(?=_)/g;
+						var dbDocument = {
+							id : regex.exec(String(data[each].id))[0],
+							coordinates : [ data[each].location.longitude, data[each].location.latitude ],
+							img_hi_res : data[each].images.standard_resolution.url,
+							img_lo_res : data[each].images.low_resolution.url,
+							img_thumb : data[each].images.thumbnail.url,
+							time : data[each].created_time
+						};
 					};
-				};
-				console.log("Newest photos added to DB:" + dbDocument.id)
-				
-				//var insta = new instagramModel(dbDocument); // new db document
-				 //save to database
-				// insta.save(function(err){
-				// 	if(err) { console.log(err) }
-				// 	else { console.log("saved newer photos " + dbDocument.id) }
-				// });
-			};	
+					console.log("Newest photos added to DB:" + dbDocument.id)
+					
+					//var insta = new instagramModel(dbDocument); // new db document
+					 //save to database
+					// insta.save(function(err){
+					// 	if(err) { console.log(err) }
+					// 	else { console.log("saved newer photos " + dbDocument.id) }
+					// });
+				};	
+			};
 		}
 	});
 };

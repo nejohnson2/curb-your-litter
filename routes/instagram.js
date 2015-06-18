@@ -95,7 +95,7 @@ function getNewest(max_id) {
 				console.log("Newest photos added to DB:" + dbDocument.id)
 				
 				var insta = new instagramModel(dbDocument); // new db document
-				 save to database
+				//save to database
 				insta.save(function(err){
 					if(err) { console.log(err) }
 					else { console.log("saved newer photos " + dbDocument.id) }

@@ -40,7 +40,7 @@ function harvester() {
 
 	Instagram.tags.recent({
 		name: 'Greenpoint',
-		complete: function(data,pagination) {
+		complete: function(data) {
 			//regex strips the underscore and additional numbers from the ID that comes back
 			
 			for(each in data) {
@@ -76,7 +76,7 @@ function getNewest(id) {
 		complete: function(data,pagination) {
 			
 			//console.log(data)
-			//console.log(pagination)
+			console.log(pagination)
 			for(each in data) {
 				if(data[each].location != null){
 					//regex strips a non-relevant number string from the ID that comes back
@@ -116,7 +116,7 @@ function mostRecent() {
 	    	console.log("There were no photos in the database. Harvesting some now!")
 	    	harvester();
 		} else if(record != null) {
-	    	//console.log("found newest photo in database, with id: " + record.id);
+	    	console.log("found newest photo in database, with id: " + record.id);
 	    	console.log(record);
 	    	console.log("getting any new photos after this one.")
 	    	getNewest(record.id);

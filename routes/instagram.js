@@ -70,6 +70,7 @@ function harvester() {
 
 function getNewest(id) {
 	console.log("getting newest photos...")
+	console.log(id);
 	Instagram.tags.recent({
 		name: 'cyltesttest',
 		MAX_TAG_ID: id,
@@ -119,7 +120,7 @@ function mostRecent() {
 	    	harvester();
 		} else if(record != null) {
 	    	console.log("found newest photo in database, with id: " + record.id);
-	    	console.log(record);
+	    	//onsole.log(record);
 	    	console.log("getting any new photos after this one.")
 	    	getNewest(record.id);
 		}

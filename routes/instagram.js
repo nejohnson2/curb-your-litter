@@ -64,13 +64,13 @@ function harvester() {
 						time : data[each].created_time
 					};
 				};
-				console.log("Photos added to DB:" + dbDocument.id)
+				
 				
 				var insta = new instagramModel(dbDocument); // new db document
 				 //save to database
 				insta.save(function(err){
 					if(err) { console.log(err) }
-					else { console.log("saved harvested photos") }
+					else { console.log("Photos added to DB:" + dbDocument.id) }
 				});
 			};	
 		}
@@ -122,7 +122,7 @@ function getNewest(max_id) {
 function mostRecent() {
 	console.log("Getting information on most recent photo")
 
-	instagramModel.findOne({},{},{sort:{ '$natural	':-1 } },function(err, record){
+	instagramModel.findOne({},{},{sort:{ '$natural	':1 } },function(err, record){
 	    if (err) {
 	    	console.error('uhoh something went wrong');
 	    	//console.error(err);
